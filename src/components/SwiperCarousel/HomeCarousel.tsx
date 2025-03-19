@@ -27,39 +27,49 @@ export default function HomeCarousel() {
     },
   ];
   return (
-    <div className="relative group swiper-group w-full h-full">
-      <div className="px-3 invisible opacity-0 transition-all flex group-hover:opacity-100 group-hover:visible justify-between absolute z-10 w-full top-1/2 -translate-y-1/2">
-        <button className="prev-el p-3 rounded-full bg-white/75 backdrop-blur hover:bg-white">
-          <ChevronLeft size={22} />
-        </button>
-        <button className="next-el p-3 rounded-full bg-white/75 backdrop-blur hover:bg-white">
-          <ChevronRight size={22} />
-        </button>
-      </div>
+    <>
+      <button className="prev-el p-2 rounded-full bg-white invisible opacity-0 transition-all group-hover:opacity-100 group-hover:visible absolute z-10 top-1/2 left-6 -translate-y-1/2">
+        <ChevronLeft size={20} />
+      </button>
+      <button className="next-el p-2 rounded-full bg-white invisible opacity-0 transition-all group-hover:opacity-100 group-hover:visible absolute z-10 top-1/2 right-6 -translate-y-1/2">
+        <ChevronRight size={20} />
+      </button>
       <Swiper
-        spaceBetween={24}
+        spaceBetween={0}
         slidesPerView={1}
-        className="w-full h-full flex flex-col"
+        className="aspect-[9/8] cursor-grab overflow-hidden rounded-2xl"
         modules={[Navigation, Autoplay, Pagination]}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
-        speed={2000}
+        pagination={{
+          clickable: true,
+          el: ".swiper-pagination",
+          bulletClass: "custom-bullet",
+          bulletActiveClass: "custom-bullet-active",
+          renderBullet: function (index, className) {
+            return `<button class="${className} custom-bullet"></button>`;
+          },
+        }}
+        autoplay={{ delay: 3000 }}
+        speed={1000}
         loop={true}
         navigation={{ nextEl: ".next-el", prevEl: ".prev-el" }}>
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="relative">
-            <Image
-              src={`/carousel/${slide.image}`}
-              width={400}
-              height={400}
-              alt={slide.title}
-              title={slide.title}
-              className="w-full h-full aspect-square object-cover rounded-lg"
-            />
-            <div className="image-swiper absolute inset-0"></div>
+          <SwiperSlide
+            key={index}
+            className="relative aspect-[9/8] bg-inherit text-center">
+            <figure className="absolute inset-0 w-full">
+              <Image
+                src={`/carousel/${slide.image}`}
+                width={400}
+                height={400}
+                alt={slide.title}
+                title={slide.title}
+                className="w-full h-full object-cover"
+              />
+            </figure>
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+      <div className="swiper-pagination mt-2 flex justify-center gap-2 static"></div>
+    </>
   );
 }

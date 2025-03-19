@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --breakpoint-sm: 520px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 960px;
-  --breakpoint-xl: 1140px;
-  --breakpoint-2xl: 1320px;
   --animate-floating: floating 2s ease-in-out alternate infinite;
   @keyframes floating {
     from {
@@ -14,6 +9,14 @@
     to {
       transform: translateY(-3%);
     }
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply focus:outline-none;
   }
 }
 
@@ -27,25 +30,17 @@ button {
 }
 
 .btn-focus {
-  @apply focus:ring-4 focus:ring-slate-300;
-}
-
-.swiper {
-  display: flex;
-  flex-direction: column;
-}
-
-.swiper-group:hover .image-swiper {
-  background: linear-gradient(transparent 50%, #0008);
+  @apply transition-all focus:ring-3 focus:ring-slate-300;
 }
 
 .swiper-pagination {
   position: static !important;
 }
 
-.swiper-pagination-bullet {
-  background: #5b3877 !important;
+.custom-bullet {
+  @apply w-2 h-2 rounded-xl bg-zinc-200;
 }
-.swiper-pagination-bullet-active {
-  background: #bbafc2 !important;
+
+.custom-bullet-active {
+  @apply bg-zinc-300;
 }

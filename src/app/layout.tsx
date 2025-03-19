@@ -39,7 +39,7 @@ export default function RootLayout({
           showAtBottom={false}
         />
         <Navbar />
-        <main className="container">{children}</main>
+        {children}
       </body>
     </html>
   );
